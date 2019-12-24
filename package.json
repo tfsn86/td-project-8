@@ -1,0 +1,25 @@
+{
+  "name": "sql-library-manager",
+  "version": "1.0.0",
+  "description": "A SQL Library Manager",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tfsn86/td-project-8.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tfsn86/td-project-8/issues"
+  },
+  "homepage": "https://github.com/tfsn86/td-project-8#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^2.0.4",
+    "sequelize": "^5.21.3",
+    "sqlite3": "^4.1.1"
+  }
+}
