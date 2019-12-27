@@ -26,4 +26,5 @@ module.exports = sequelize => {
 		},
 		{ sequelize }
 	);
+	return Book;
 };
