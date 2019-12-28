@@ -19,9 +19,9 @@ router.get(
 	'/',
 	asyncHandler(async (req, res) => {
 		const books = await Book.findAll({ order: [['title', 'ASC']] });
-		res.render('books/index', {
+		res.render('index', {
 			books,
-			title: 'My Library'
+			title: 'Books'
 		});
 	})
 );
