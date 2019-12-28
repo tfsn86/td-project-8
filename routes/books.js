@@ -27,7 +27,9 @@ router.get(
 );
 
 // Get the create new book form
-router.get('/books/new', (req, res) => {});
+router.get('/new', (req, res) => {
+	res.render('new-book', { book: {}, title: 'New Book' });
+});
 
 // Posts a new book to the database
 router.post('/books/new', (req, res) => {});
