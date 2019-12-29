@@ -26,21 +26,43 @@ router.get(
 	})
 );
 
-// Get the create new book form
+/* Create a new book form. */
 router.get('/new', (req, res) => {
-	res.render('new-book', { book: {}, title: 'New Book' });
+	res.render('new-book', {
+		book: {},
+		title: 'New Book'
+	});
 });
 
-// Posts a new book to the database
-router.post('/books/new', (req, res) => {});
+/* POST new book */
+router.post(
+	'/new',
+	asyncHandler(async (req, res) => {
+		let book;
+		try {
+			book = await Book.create(req.body);
+			res.redirect('/');
+		} catch (error) {
+			if (err.name === 'SequelizeValidationError') {
+				res.render('new-book', {
+					book: {},
+					title: 'New Book',
+					errors: err.errors
+				});
+			} else {
+				throw err;
+			}
+		}
+	})
+);
 
 // Gets book detail form
-router.get('/books/:id', (req, res) => {});
+router.get('/:id', (req, res) => {});
 
 // Updates book information
-router.post('/books/:id', (req, res) => {});
+router.post('/:id', (req, res) => {});
 
 // Deletes a book
-router.get('/books/:id/delete', (req, res) => {});
+router.get('/:id/delete', (req, res) => {});
 
 module.exports = router;
