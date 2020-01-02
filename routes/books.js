@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const Sequelize = require('sequelize');
 const Book = require('../models').Book;
 
 // Handler function to wrap each route
@@ -21,7 +20,7 @@ router.get(
 		const books = await Book.findAll({ order: [['title', 'ASC']] });
 		res.render('index', {
 			books,
-			title: 'Books'
+			title: 'The Library'
 		});
 	})
 );
@@ -43,13 +42,14 @@ router.post(
 			book = await Book.create(req.body);
 			res.redirect('/');
 		} catch (error) {
-			if (err.name === 'SequelizeValidationError') {
+			if (error.name === 'SequelizeValidationError') {
 				res.render('new-book', {
 					book: {},
+					errors: error.errors,
 					title: 'New Book'
 				});
 			} else {
-				throw err;
+				throw error;
 			}
 		}
 	})
@@ -63,7 +63,13 @@ router.get(
 		if (book) {
 			res.render('update-book', { book, title: book.title });
 		} else {
-			res.sendStatus(404);
+			res.render('error', {
+				error: {
+					status: 404,
+					message:
+						'The book you were looking for does not exist in the library.'
+				}
+			});
 		}
 	})
 );
@@ -85,7 +91,11 @@ router.post(
 			if (error.name === 'SequelizeValidationError') {
 				book = Book.build(req.body);
 				book.id = req.params.id;
-				res.render('update-book', { book, title: book.title });
+				res.render('update-book', {
+					book,
+					errors: error.errors,
+					title: book.title
+				});
 			} else {
 				throw error;
 			}
