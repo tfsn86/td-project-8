@@ -16,12 +16,10 @@ module.exports = sequelize => {
 				validate: { notEmpty: { msg: '"Author" is required"' } }
 			},
 			genre: {
-				type: Sequelize.STRING,
-				validate: { notEmpty: { msg: '"Genre" is required"' } }
+				type: Sequelize.STRING
 			},
 			year: {
-				type: Sequelize.INTEGER,
-				validate: { notEmpty: { msg: '"Year" is required"' } }
+				type: Sequelize.INTEGER
 			}
 		},
 		{ sequelize }
